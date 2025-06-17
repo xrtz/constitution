@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/welcomeFragment">
+
+    <fragment
+        android:id="@+id/welcomeFragment"
+        android:name="com.example.constitutionrf.WelcomeFragment"
+        android:label="fragment_welcome"
+        tools:layout="@layout/fragment_welcome" >
+        <action
+            android:id="@+id/action_welcomeFragment_to_listFragment"
+            app:destination="@id/listFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/listFragment"
+        android:name="com.example.constitutionrf.ListFragment"
+        android:label="fragment_list"
+        tools:layout="@layout/fragment_list" >
+        <action
+            android:id="@+id/action_listFragment_to_stateFragment"
+            app:destination="@id/stateFragment">
+            <argument
+                android:name="NUMBER"
+                app:argType="integer"
+                android:defaultValue="1" />
+        </action>
+    </fragment>
+    <fragment
+        android:id="@+id/stateFragment"
+        android:name="com.example.constitutionrf.StateFragment"
+        android:label="fragment_state"
+        tools:layout="@layout/fragment_state">
+        <argument
+            android:name="NUMBER"
+            app:argType="integer"
+            android:defaultValue="0" />
+    </fragment>
+</navigation>
