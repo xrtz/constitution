@@ -12,8 +12,36 @@ import com.example.constitutionrf.sampledata.AppDatabaseModel
 import com.example.constitutionrf.sampledata.StateModel
 import com.example.constitutionrf.sampledata.StateViewModel
 
+/**
+ * Главная активность приложения «Конституция РФ».
+ *
+ * Выполняет начальную инициализацию при запуске приложения:
+ * - Включает отображение в режиме edge-to-edge.
+ * - Настраивает отступы под системные бары (статусбар, навигация).
+ * - Инициализирует [StateViewModel] и предзаполняет локальную базу данных
+ *   заглушками для всех 137 статей (текст «Статья не найдена»).
+ * - Настраивает граф навигации через [NavHostFragment].
+ *
+ * Реальные тексты статей загружаются лениво в [StateFragment]
+ * при первом открытии каждой статьи.
+ */
 class MainActivity : AppCompatActivity() {
+
+    /**
+     * ViewModel для управления данными статей.
+     * Разделяется между фрагментами через область видимости активности.
+     */
     private lateinit var stateViewModel: StateViewModel
+
+    /**
+     * Вызывается при создании активности.
+     * Настраивает UI и предзаполняет БД заглушками всех 137 статей.
+     *
+     * Повторные вызовы (например, при пересоздании активности) не приводят к
+     * дублированию записей, так как DAO использует стратегию INSERT OR IGNORE.
+     *
+     * @param savedInstanceState Сохранённое состояние активности, если имеется.
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -30,6 +58,5 @@ class MainActivity : AppCompatActivity() {
         }
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         val navController = navHostFragment.navController
-
     }
 }

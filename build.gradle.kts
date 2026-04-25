@@ -4,6 +4,7 @@ buildscript {
     }
 }
 plugins {
+    id("org.jetbrains.dokka") version "1.9.10" apply false
     alias(libs.plugins.android.application) apply false
     alias(libs.plugins.kotlin.android) apply false
 }
